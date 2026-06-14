@@ -9,8 +9,8 @@ from PIL import Image, ImageDraw, ImageFont
 import io
 
 # API Keys
-SCRAPERAPI_KEY = "1415b7cad36c3af2b0ef9f78257086ba"
-SERPAPI_KEY = "7308daf2625e9992eb4c5705793db173cec2f2e5a202e73cd3bbe3c21855a210"
+SCRAPERAPI_KEY = "46cb45f5003472aa3171f18647706c36"
+SERPAPI_KEY = "72584f67c92667d803cc636194c0b307b17719b76e75ed7fd03688c93c7eec93"
 
 # Function to generate simple product image placeholder
 def generate_product_image(product_name, source):
@@ -104,7 +104,6 @@ def scrape_amazon(product, use_mock=False):
     try:
         response = requests.get(url, timeout=10)
         if response.status_code != 200:
-            st.error(f"Amazon Scraper Error: {response.status_code}")
             return get_mock_data(product, "amazon")
         
         data = response.json()
@@ -125,9 +124,8 @@ def scrape_amazon(product, use_mock=False):
             })
         return processed_data
     except Exception as e:
-        st.error(f"Amazon scraper error: {str(e)}")
-        return get_mock_data(product, "amazon")
-
+            return get_mock_data(product, "amazon")
+    
 # Flipkart Scraper Function with timeout and retry
 def scrape_flipkart(product, use_mock=False):
     if use_mock:
